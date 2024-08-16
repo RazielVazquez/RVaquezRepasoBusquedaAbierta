@@ -1,0 +1,84 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "GetByAutor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Libros</h2>
+
+<hr />
+
+
+@using (Html.BeginForm("GetByAutor", "Libro", FormMethod.Get))
+{
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.Autor, new { @class = "form-control text-center", @placeholder = "Búsqueda por Autor" })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("GetByTitulo", "Libro", FormMethod.Get))
+{
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.TituloLibro, new { @class = "form-control text-center", @placeholder = "Búsqueda por Título" })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="float-end">
+    <a href="@Url.Action("Form", "Libro")" type="button" class="btn btn-primary" style="font-weight: 700">Agregar  <i class="bi bi-plus-circle"></i></a>
+</div>
+
+
+
+
+@if (Model == null)
+{
+    <div class="alert alert-danger" role="alert">
+        Error! La lista esta vacia!
+    </div>
+}
+else
+{
+    <div class="mt-5">
+        <table class="table table-dark table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Editar</th>
+                    <th>IdLibro</th>
+                    <th>Autor</th>
+                    <th>Titulo</th>
+                    <th>Año</th>
+                    <th>Editorial</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Libro libro in Model.Libros)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@libro.IdLibro</td>
+                        <td>@libro.Autor</td>
+                        <td>@libro.TituloLibro</td>
+                        <td>@libro.AñoPublicacion</td>
+                        <td>@libro.Editorial</td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

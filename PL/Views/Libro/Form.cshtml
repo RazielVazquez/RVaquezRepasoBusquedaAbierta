@@ -1,0 +1,61 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.Mensaje
+    </div>
+}
+
+<h2 class="text-center">Formulario Libro</h2>
+
+<hr />
+
+@using (Html.BeginForm("Form", "Libro", FormMethod.Post))
+{
+    <div class="bg-formulario" style="font-weight:600; color: white;">
+        <div class="row justify-content-center">
+            <div class="col d-flex flex-column align-items-center">
+                @Html.LabelFor(model => model.TituloLibro, "Titulo del libro")
+                @Html.TextBoxFor(model => model.TituloLibro, new { @class = "form-control text-center", @placeholder = "Título" })
+            </div>
+            <div class="col d-flex flex-column align-items-center">
+                @Html.LabelFor(model => model.Autor)
+                @Html.TextBoxFor(model => model.Autor, new { @class = "form-control text-center", @placeholder = "Autor del libro" })
+            </div>
+            <div class="col d-flex flex-column align-items-center">
+                @Html.LabelFor(model => model.Editorial)
+                @Html.TextBoxFor(model => model.Editorial, new { @class = "form-control text-center", @placeholder = "Editorial del libro" })
+            </div>
+        </div>
+
+        <div class="d-flex flex-column align-items-center mt-5">
+            @Html.LabelFor(model => model.AñoPublicacion, "Año de publicación")
+            @Html.TextBoxFor(model => model.AñoPublicacion, new { @class = "form-control text-center", @placeholder = "Año de publicacion Ej: 2001" })
+        </div>
+    </div>
+
+    <div class="row justify-content-end mt-4">
+        <div class="col-md-1 d-flex flex-column align-items-end">
+            <input type="submit" class="btn btn-success" value="Guardar" />
+        </div>
+
+        <div class="col-md-1 d-flex flex-column align-items-end">
+            <a href="@Url.Action("GetByAutor", "Libro")" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+}
+
+<style>
+    .bg-formulario {
+        background-color: #565656;
+        padding: 3rem 0;
+        border-radius: 2.5rem;
+        border: 0.2rem solid #e7d23c;
+    }
+</style>
+
